@@ -1,7 +1,7 @@
 FROM alpine:edge
 MAINTAINER nikolauska
 
-ENV ELIXIR_VERSION 1.3.2
+ENV ELIXIR_VERSION 1.3.4
 
 # Install Erlang/Elixir
 RUN apk -U upgrade && \
@@ -21,15 +21,9 @@ RUN apk -U upgrade && \
 # Add local node module binaries to PATH
 ENV PATH $PATH:node_modules/.bin:/opt/elixir-${ELIXIR_VERSION}/bin
 
-# Install node-sass and phantomjs
-RUN npm install -g node-sass phantomjs-prebuilt
-
 # Install Hex+Rebar
 RUN mix local.hex --force && \
     mix local.rebar --force && \
     mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
-
-EXPOSE 8000
-EXPOSE 8081
 
 CMD ["sh", "-c", "iex --version && mix deps.get && mix phoenix.server"]
