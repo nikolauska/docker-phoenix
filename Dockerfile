@@ -1,29 +1,30 @@
-FROM alpine:edge
-MAINTAINER nikolauska
+FROM ubuntu:latest
 
-ENV ELIXIR_VERSION 1.3.4
+MAINTAINER Nikolauska <nikolauska1@gmail.com>
 
-# Install Erlang/Elixir
-RUN apk -U upgrade && \
-    apk --update --no-cache add ncurses-libs git make g++ wget python ca-certificates openssl nodejs \
-                     erlang erlang-dev erlang-kernel erlang-hipe erlang-compiler \
-                     erlang-stdlib erlang-erts erlang-tools erlang-syntax-tools erlang-sasl \
-                     erlang-crypto erlang-public-key erlang-ssl erlang-ssh erlang-asn1 erlang-inets \
-                     erlang-inets erlang-mnesia erlang-odbc erlang-xmerl \
-                     erlang-erl-interface erlang-parsetools erlang-eunit && \
-    update-ca-certificates --fresh && \
-    wget https://github.com/elixir-lang/elixir/releases/download/v${ELIXIR_VERSION}/Precompiled.zip && \
-    mkdir -p /opt/elixir-${ELIXIR_VERSION}/ && \
-    unzip Precompiled.zip -d /opt/elixir-${ELIXIR_VERSION}/ && \
-    rm Precompiled.zip && \
-    rm -rf /var/cache/apk/*
+# Elixir requires UTF-8
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
-# Add local node module binaries to PATH
-ENV PATH $PATH:node_modules/.bin:/opt/elixir-${ELIXIR_VERSION}/bin
+# update and install software
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y curl wget git make sudo tar bzip2 && \
+    wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && \
+    dpkg -i erlang-solutions_1.0_all.deb && \
+    apt-get update && \
+    rm erlang-solutions_1.0_all.deb && \
+    touch /etc/init.d/couchdb && \
+    apt-get install -y elixir erlang-dev erlang-dialyzer erlang-parsetools && \
+    apt-get clean
 
-# Install Hex+Rebar
 RUN mix local.hex --force && \
     mix local.rebar --force && \
-    mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
+    mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
 
-CMD ["sh", "-c", "iex --version && mix deps.get && mix phoenix.server"]
+# Install nodejs LTS
+RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs
+
+# Install phantomjs and node sass
+RUN sudo npm install -g node-sass phantomjs-prebuilt
