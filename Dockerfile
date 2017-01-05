@@ -12,14 +12,14 @@ ENV ELIXIR_VERSION 1.3.4
 
 # update and install software
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y curl wget git make sudo tar bzip2 libfontconfig \
+    apt-get install -y curl wget git make sudo tar bzip2 libfontconfig unzip \
     build-essential && \
     wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && \
     dpkg -i erlang-solutions_1.0_all.deb && \
     apt-get update && \
     rm erlang-solutions_1.0_all.deb && \
     touch /etc/init.d/couchdb && \
-    apt-get install -y erlang-dev erlang-dialyzer erlang-parsetools && \
+    apt-get install -y erlang erlang-dev erlang-dialyzer erlang-parsetools && \
     apt-get clean && \
     wget https://github.com/elixir-lang/elixir/releases/download/v${ELIXIR_VERSION}/Precompiled.zip && \
     mkdir -p /opt/elixir-${ELIXIR_VERSION}/ && \
