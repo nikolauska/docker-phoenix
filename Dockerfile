@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get update && \
     rm erlang-solutions_1.0_all.deb && \
     touch /etc/init.d/couchdb && \
-    apt-get install -y erlang-dev erlang-dialyzer erlang-parsetools && \
+    apt-get install -y erlang erlang-dev erlang-dialyzer erlang-parsetools && \
     apt-get clean && \
     wget https://github.com/elixir-lang/elixir/releases/download/v${ELIXIR_VERSION}/Precompiled.zip && \
     mkdir -p /opt/elixir-${ELIXIR_VERSION}/ && \
