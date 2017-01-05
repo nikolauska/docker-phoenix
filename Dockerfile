@@ -12,7 +12,7 @@ ENV ELIXIR_VERSION 1.4.0
 
 # update and install software
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y curl wget git make sudo tar bzip2 libfontconfig \
+    apt-get install -y curl wget git make sudo tar bzip2 libfontconfig unzip \
     build-essential && \
     wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && \
     dpkg -i erlang-solutions_1.0_all.deb && \
