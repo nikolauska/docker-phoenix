@@ -8,7 +8,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-ENV ELIXIR_VERSION 1.4.0
+ENV ELIXIR_VERSION 1.3.4
 
 # update and install software
 RUN apt-get update && apt-get upgrade -y && \
