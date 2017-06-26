@@ -1,7 +1,7 @@
 FROM alpine:edge
 MAINTAINER nikolauska
 
-ENV ELIXIR_VERSION 1.4.0
+ENV ELIXIR_VERSION 1.4.5
 
 # Install Erlang/Elixir
 RUN apk -U upgrade && \
