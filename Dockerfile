@@ -2,12 +2,6 @@ FROM ubuntu:latest
 
 MAINTAINER Nikolauska <nikolauska1@gmail.com>
 
-# Elixir requires UTF-8
-RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
-
 ENV ELIXIR_VERSION 1.4.5
 
 # update and install software
