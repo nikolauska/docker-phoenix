@@ -2,11 +2,20 @@ FROM ubuntu:latest
 
 MAINTAINER Nikolauska <nikolauska1@gmail.com>
 
+# Update and install locales
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y locales
+
+# Set the locale
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
 ENV ELIXIR_VERSION 1.4.5
 
 # update and install software
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y curl wget git make sudo tar bzip2 libfontconfig unzip \
+RUN apt-get install -y curl wget git make sudo tar bzip2 libfontconfig unzip \
     build-essential && \
     wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && \
     dpkg -i erlang-solutions_1.0_all.deb && \
