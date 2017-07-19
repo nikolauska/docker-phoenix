@@ -1,29 +1,30 @@
-FROM alpine:edge
+FROM bitwalker/alpine-elixir:1.4.5
 MAINTAINER nikolauska
 
-ENV ELIXIR_VERSION 1.4.5
+# Update env so docker is refreshed fully
+ENV REFRESHED_AT=2017-07-19 \
+    # Set this so that CTRL+G works properly
+    TERM=xterm
 
-# Install Erlang/Elixir
-RUN apk -U upgrade && \
-    apk --update --no-cache add ncurses-libs git make g++ wget python ca-certificates openssl nodejs \
-                     erlang erlang-dev erlang-kernel erlang-hipe erlang-compiler \
-                     erlang-stdlib erlang-erts erlang-tools erlang-syntax-tools erlang-sasl \
-                     erlang-crypto erlang-public-key erlang-ssl erlang-ssh erlang-asn1 erlang-inets \
-                     erlang-inets erlang-mnesia erlang-odbc erlang-xmerl \
-                     erlang-erl-interface erlang-parsetools erlang-eunit && \
+# Install NPM
+RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories && \
+    mkdir -p /opt/app && \
+    chmod -R 777 /opt/app && \
+    apk update && \
+    apk --no-cache --update add git make g++ wget curl inotify-tools nodejs@edge nodejs-npm@edge && \
+    npm install npm -g --no-progress && \
     update-ca-certificates --fresh && \
-    wget https://github.com/elixir-lang/elixir/releases/download/v${ELIXIR_VERSION}/Precompiled.zip && \
-    mkdir -p /opt/elixir-${ELIXIR_VERSION}/ && \
-    unzip Precompiled.zip -d /opt/elixir-${ELIXIR_VERSION}/ && \
-    rm Precompiled.zip && \
     rm -rf /var/cache/apk/*
 
-# Add local node module binaries to PATH
-ENV PATH $PATH:node_modules/.bin:/opt/elixir-${ELIXIR_VERSION}/bin
+# Add node bin to path, change home directory
+ENV PATH=./node_modules/.bin:$PATH \
+    HOME=/opt/app
 
-# Install Hex+Rebar
+# Install Hex and Rebar again
 RUN mix local.hex --force && \
-    mix local.rebar --force && \
-    mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
+    mix local.rebar --force
 
-CMD ["sh", "-c", "iex --version && mix deps.get && mix phoenix.server"]
+# Change workdir to home dir
+WORKDIR /opt/app
+
+CMD ["/bin/sh"]
