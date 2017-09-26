@@ -13,7 +13,7 @@ RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/reposito
     apk update && \
     apk add --update --no-cache \
         git make g++ wget curl inotify-tools \
-        nodejs@edge nodejs-npm@edge python python-dev pip && \
+        nodejs@edge nodejs-npm@edge python python-dev py-pip && \
     npm install npm -g --no-progress && \
     update-ca-certificates --fresh && \
     rm -rf /var/cache/apk/*
