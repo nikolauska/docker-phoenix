@@ -26,8 +26,7 @@ ENV PATH=./node_modules/.bin:$PATH \
 RUN mix local.hex --force && \
     mix local.rebar --force
 
-RUN pip install -U \
-    pip \
+RUN pip install -U pip
 
 # Change workdir to home dir
 WORKDIR /opt/app
