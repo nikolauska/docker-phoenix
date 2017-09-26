@@ -2,7 +2,7 @@ FROM bitwalker/alpine-elixir:1.4.5
 MAINTAINER nikolauska
 
 # Update env so docker is refreshed fully
-ENV REFRESHED_AT=2017-07-19 \
+ENV REFRESHED_AT=2017-09-26 \
     # Set this so that CTRL+G works properly
     TERM=xterm
 
@@ -12,7 +12,7 @@ RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/reposito
     chmod -R 777 /opt/app && \
     apk update && \
     apk add --update --no-cache \
-        git make g++ wget curl inotify-tools \
+        git make g++ wget curl inotify-tools bash \
         nodejs@edge nodejs-npm@edge python python-dev py-pip && \
     npm install npm -g --no-progress && \
     update-ca-certificates --fresh && \
