@@ -11,7 +11,9 @@ RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/reposito
     mkdir -p /opt/app && \
     chmod -R 777 /opt/app && \
     apk update && \
-    apk --no-cache --update add git make g++ wget curl inotify-tools nodejs@edge nodejs-npm@edge && \
+    apk add --update --no-cache \
+        git make g++ wget curl inotify-tools \
+        nodejs@edge nodejs-npm@edge python python-dev pip && \
     npm install npm -g --no-progress && \
     update-ca-certificates --fresh && \
     rm -rf /var/cache/apk/*
@@ -23,6 +25,9 @@ ENV PATH=./node_modules/.bin:$PATH \
 # Install Hex and Rebar again
 RUN mix local.hex --force && \
     mix local.rebar --force
+
+RUN pip install -U \
+    pip \
 
 # Change workdir to home dir
 WORKDIR /opt/app
