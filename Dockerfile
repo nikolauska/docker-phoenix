@@ -12,7 +12,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-ENV ELIXIR_VERSION 1.4.5
+ENV ELIXIR_VERSION 1.5.2
 
 # update and install software
 RUN apt-get install -y curl wget git make sudo tar bzip2 libfontconfig unzip \
@@ -29,7 +29,7 @@ RUN apt-get install -y curl wget git make sudo tar bzip2 libfontconfig unzip \
     unzip Precompiled.zip -d /opt/elixir-${ELIXIR_VERSION}/
 
 # Install nodejs LTS
-RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && sudo apt-get install -y nodejs
 
 # Add local node module binaries to PATH
 ENV PATH $PATH:/opt/elixir-${ELIXIR_VERSION}/bin
@@ -40,3 +40,5 @@ RUN mix local.hex --force && \
 
 # Install phantomjs and node sass
 RUN sudo npm install -g node-sass phantomjs-prebuilt
+
+CMD ["/bin/sh"]
