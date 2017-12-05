@@ -38,7 +38,4 @@ RUN mix local.hex --force && \
     mix local.rebar --force && \
     mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
 
-# Install phantomjs and node sass
-RUN sudo npm install -g node-sass phantomjs-prebuilt
-
 CMD ["/bin/sh"]
