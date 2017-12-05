@@ -1,8 +1,8 @@
-FROM bitwalker/alpine-elixir:1.4.5
+FROM bitwalker/alpine-elixir:1.5.2
 MAINTAINER nikolauska
 
 # Update env so docker is refreshed fully
-ENV REFRESHED_AT=2017-07-19 \
+ENV REFRESHED_AT=2017-12-05 \
     # Set this so that CTRL+G works properly
     TERM=xterm
 
