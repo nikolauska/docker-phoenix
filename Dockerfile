@@ -12,7 +12,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-ENV ELIXIR_VERSION 1.5.3
+ENV ELIXIR_VERSION 1.6.0
 
 # update and install software
 RUN apt-get install -y curl wget git make sudo tar bzip2 libfontconfig unzip \
