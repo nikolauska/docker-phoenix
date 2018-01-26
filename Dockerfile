@@ -12,7 +12,7 @@ RUN yum update -y && \
     # Setup locales
     localedef -i en_US -f UTF-8 en_US.UTF-8 && locale && \
     # Setup build tools
-    yum install -y curl wget git make gcc sudo tar bzip2 unzip wxGTK && \
+    yum install -y curl wget git make gcc gcc-c++ sudo tar bzip2 unzip wxGTK && \
     # Add EPEL Repo
     wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     rpm -ivh epel-release-latest-7.noarch.rpm && \
