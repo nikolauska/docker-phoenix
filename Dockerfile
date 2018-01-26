@@ -3,7 +3,7 @@ FROM centos:7
 MAINTAINER Nikolauska <nikolauska1@gmail.com>
 
 # Environment variables
-ENV ELIXIR="1.6.0" \
+ENV ELIXIR="1.5.3" \
     PATH="${PATH}:/opt/elixir-${ELIXIR}/bin" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
@@ -24,7 +24,7 @@ RUN yum update -y && \
     rm erlang-solutions-1.0-1.noarch.rpm && \
     yum install -y erlang && \
     # Install elixir
-    wget https://github.com/elixir-lang/elixir/releases/download/v${ELIXIR_VERSION}/Precompiled.zip && \
+    wget https://github.com/elixir-lang/elixir/releases/download/v${ELIXIR}/Precompiled.zip && \
     mkdir -p /opt/elixir-${ELIXIR}/ && \
     unzip Precompiled.zip -d /opt/elixir-${ELIXIR}/ && \
     rm Precompiled.zip && \
