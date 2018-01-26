@@ -3,7 +3,7 @@ FROM centos:7
 MAINTAINER Nikolauska <nikolauska1@gmail.com>
 
 # Environment variables
-ENV ELIXIR="1.5.3" \
+ENV ELIXIR="1.6.0" \
     PATH="${PATH}:/opt/elixir-${ELIXIR}/bin" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
