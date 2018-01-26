@@ -3,11 +3,10 @@ FROM centos:7
 MAINTAINER Nikolauska <nikolauska1@gmail.com>
 
 # Environment variables
-ENV ELIXIR="1.6.0" \
-    PATH="${PATH}:/opt/elixir-${ELIXIR}/bin" \
-    LANG="en_US.UTF-8" \
-    LANGUAGE="en_US:en" \
-    LC_ALL="en_US.UTF-8"
+ENV ELIXIR=1.5.3 \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8
 
 RUN yum update -y && \
     # Setup locales
@@ -30,9 +29,12 @@ RUN yum update -y && \
     rm Precompiled.zip && \
     # Install nodejs LTS
     curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash - && \
-    sudo yum install -y nodejs && \
-    # Setup hex, rebar and phx
-    mix local.hex --force && \
+    sudo yum install -y nodejs
+
+ENV PATH=$PATH:/opt/elixir-${ELIXIR}/bin
+
+# Setup hex, rebar and phx
+RUN mix local.hex --force && \
     mix local.rebar --force && \
     mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
 
