@@ -1,4 +1,4 @@
-FROM bitwalker/alpine-elixir:1.6.1
+FROM elixir:1.6.1-alpine
 MAINTAINER nikolauska
 
 # Update env so docker is refreshed fully
