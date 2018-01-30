@@ -3,7 +3,7 @@ FROM centos:7
 MAINTAINER Nikolauska <nikolauska1@gmail.com>
 
 # Environment variables
-ENV ELIXIR=1.6.0 \
+ENV ELIXIR=1.6.1 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8
