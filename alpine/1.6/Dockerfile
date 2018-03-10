@@ -1,8 +1,8 @@
-FROM elixir:1.6.2-alpine
+FROM elixir:1.6.3-alpine
 MAINTAINER nikolauska
 
 # Update env so docker is refreshed fully
-ENV REFRESHED_AT=2018-03-04 \
+ENV REFRESHED_AT=2018-03-10 \
     # Set this so that CTRL+G works properly
     TERM=xterm
 
