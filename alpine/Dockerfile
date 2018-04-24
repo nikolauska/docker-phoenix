@@ -7,11 +7,10 @@ ENV REFRESHED_AT=2018-03-10 \
     TERM=xterm
 
 # Install NPM
-RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories && \
-    mkdir -p /opt/app && \
+RUN mkdir -p /opt/app && \
     chmod -R 777 /opt/app && \
     apk update && \
-    apk --no-cache --update add git make g++ wget curl inotify-tools nodejs@edge nodejs-npm@edge && \
+    apk --no-cache --update add git make g++ wget curl inotify-tools nodejs nodejs-npm && \
     npm install npm -g --no-progress && \
     update-ca-certificates --fresh && \
     rm -rf /var/cache/apk/*
