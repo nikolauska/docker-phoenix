@@ -1,4 +1,4 @@
-FROM elixir:alpine
+FROM elixir-1.6:alpine
 MAINTAINER nikolauska
 
 # Update env so docker is refreshed fully
